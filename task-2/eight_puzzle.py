@@ -49,6 +49,23 @@ def h1(s):
     return res
 
 def h3(s):
-    # implement this function
     board, _, _ = s
-    return 0
+    heuristic_value = 0
+
+    for idx, tile in enumerate(board):
+        if tile == 0:  # Skip the blank tile
+            continue
+
+        # Current row and column for the tile
+        current_row, current_col = divmod(idx, 3)
+
+        # Target row and column for the tile
+        target_row, target_col = divmod(tile - 1, 3)
+
+        # Check if the tile is out of its target row or column
+        if current_row != target_row:
+            heuristic_value += 1
+        if current_col != target_col:
+            heuristic_value += 1
+
+    return heuristic_value
